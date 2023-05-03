@@ -19,4 +19,4 @@ const search = async (keyword, page) => {
     return response.data
 }
 
-export default { search }
+export default search
