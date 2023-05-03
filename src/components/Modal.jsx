@@ -13,6 +13,7 @@ render() {
         return 
     } else {
         //console.log(image.image.likes)
+
         return (            
             <div className={`Overlay ${ishide}`}>
                 <div className='Modal'>

@@ -3,6 +3,7 @@ import Searchbar from "./Searchbar";
 import Gallery from "./ImageGallery";
 import Button from "./Button";
 import Modal from "./Modal";
+import Loader from "./Loader";
 import search from './services/api'
 let page = 1
 const perPage = 12
@@ -16,12 +17,16 @@ class App extends Component {
     message: '',
     button: false,
     image: null,
-    ishide: ''
+    ishide: 'ishide',
+    visible: false
   }
 
   onSubmit = evt => {
     evt.preventDefault()
     page = 1;
+    this.setState({images: []})
+    this.setState({button: false})
+    this.setState({visible: true})
     try {
       search(this.state.keyword, page)
       .then(response => {
@@ -30,18 +35,22 @@ class App extends Component {
           this.setState({ message: 'No results found' })
           this.setState({button: false})
           this.setState({ images: []})
+          this.setState({visible: false})
         } else if (response.totalHits > 12 ) {
           this.setState({ message: '' })
           this.setState({button: true})
           this.setState({ images: response.hits})
+          this.setState({visible: false})
         } else {
           this.setState({ message: '' })
           this.setState({button: false})
           this.setState({ images: response.hits})
+          this.setState({visible: false})
         }
       })    
     } catch (error) {
       this.setState({message: `Whoops, something went wrong: ${error.message}`})
+      this.setState({visible: false})
     }
   }
 
@@ -61,6 +70,7 @@ class App extends Component {
   buttonHandler = evt => {
     evt.preventDefault()
     page += 1
+    this.setState({visible: true})    
     try {
       search(this.state.keyword, page)
       .then(response => {
@@ -68,13 +78,16 @@ class App extends Component {
         let totalPages = totalHits/perPage
         if(page < totalPages) {
           this.setState({images: this.state.images.concat(response.hits)})
+          this.setState({visible: false})
         } else {
           this.setState({images: this.state.images.concat(response.hits)})
           this.setState({button: false})
+          this.setState({visible: false})
         }
       })
     } catch (error) {
       this.setState({message: `Whoops, something went wrong: ${error.message}`})
+      this.setState({visible: false})
     } finally {
       setTimeout(this.handleScroll, 1000)
     }
@@ -86,6 +99,13 @@ class App extends Component {
           this.setState({ishide: 'ishide'})
         }
       });
+      
+  }
+
+  documentclick = () => {
+      document.addEventListener('click', (event) => {
+        console.log('okk')
+    }  )
   }
 
   onclickImage = (image) => {
@@ -96,14 +116,15 @@ class App extends Component {
   } 
 
   render() {
-    const { images, button, message, image, ishide } = this.state
-
+    const { images, button, message, image, ishide, visible } = this.state
+    
     return (
       <>
         <Modal image={image} ishide={ishide}/> 
         <Searchbar onSubmit={this.onSubmit} onChange={this.onChange}/>
         <Notification message={message}/>
-        <Gallery images={images} onclickImage={this.onclickImage}/>     
+        <Gallery images={images} onclickImage={this.onclickImage}/>
+        <Loader visible={visible}/>
         {button && <Button onclick={this.buttonHandler} />}      
       </>
     );
