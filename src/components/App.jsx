@@ -3,7 +3,7 @@ import Searchbar from "./Searchbar";
 import Gallery from "./ImageGallery";
 import Button from "./Button";
 import Modal from "./Modal";
-import api from './services/api'
+import search from './services/api'
 let page = 1
 const perPage = 12
 
@@ -23,7 +23,7 @@ class App extends Component {
     evt.preventDefault()
     page = 1;
     try {
-      api.search(this.state.keyword, page)
+      search(this.state.keyword, page)
       .then(response => {
         console.log(response.totalHits)
         if (response.hits.length === 0) {
@@ -62,7 +62,7 @@ class App extends Component {
     evt.preventDefault()
     page += 1
     try {
-      api.search(this.state.keyword, page)
+      search(this.state.keyword, page)
       .then(response => {
         let totalHits = response.totalHits;
         let totalPages = totalHits/perPage
