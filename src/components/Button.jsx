@@ -1,3 +1,5 @@
+import PropTypes from "prop-types"
+
 const Button = ({onclick}) => {
     return (
       <div className="btncontainer">
@@ -9,6 +11,10 @@ const Button = ({onclick}) => {
         </button>       
       </div>
     )
-  }
+}
+
+Button.prototype = {
+  onclick: PropTypes.func,
+}
 
 export default Button

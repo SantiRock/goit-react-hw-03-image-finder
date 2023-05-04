@@ -1,12 +1,12 @@
 const Searchbar = ({onSubmit, keyword, onChange}) => {
     return (
         <header className='Searchbar'>
-        <form className='SearchForm ' onSubmit={onSubmit}>
-            <button type='submit' className='SearchForm-button fa fa-search'>
-                <span className='SearchForm-button-label'></span>
-            </button>
+            <form className='SearchForm ' onSubmit={onSubmit}>
+             <button type='submit' className='SearchForm-button fa fa-search'>
+                 <span className='SearchForm-button-label'></span>
+             </button>
             
-            <input
+             <input
                 className='SearchForm-input'
                 type='text'
                 autoComplete='off'
@@ -14,11 +14,10 @@ const Searchbar = ({onSubmit, keyword, onChange}) => {
                 placeholder="Search images and photos"
                 value={keyword}
                 onChange={onChange}
-            />
-        </form>
-    </header>
-)
-  
+             />
+            </form>
+        </header>
+    )
 }
 
 export default Searchbar

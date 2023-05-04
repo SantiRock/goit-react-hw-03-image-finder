@@ -123,10 +123,6 @@ img {
 /*
  * Стили компонента ImageGallery
  */
-.container {
-  max-width: 1663px;
-  margin: auto;
-}
 
  .ImageGallery {
   display: grid;
@@ -139,7 +135,6 @@ img {
   list-style: none;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 20px;
 }
 
 /*
@@ -194,7 +189,6 @@ img {
 * Стили компонента Buton (Load more)
 */
 .Button {
-  margin: 20px 0; 
   padding: 8px 16px;
   border-radius: 2px;
   background-color: #3f51b5;
@@ -227,8 +221,13 @@ img {
 
 .notification {
   color: red;
-  margin-left: 20px;
   margin-top: 20px;
+  
+}
+
+.container {
+  max-width: 1663px;
+  margin: auto;
 }
 
 .loader {

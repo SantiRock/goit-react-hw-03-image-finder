@@ -1,3 +1,5 @@
+import PropTypes from "prop-types"
+
 import { ThreeDots } from  'react-loader-spinner'
 
 const Loader = ({visible}) => {
@@ -6,6 +8,10 @@ const Loader = ({visible}) => {
         <ThreeDots color='#94b7ed' visible={visible}/> 
       </div>
     )
+  }
+
+  Loader.prototype = {
+    onclick: PropTypes.bool,
   }
 
   export default Loader

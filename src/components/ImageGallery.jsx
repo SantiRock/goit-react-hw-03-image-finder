@@ -1,3 +1,5 @@
+import PropTypes from "prop-types"
+
 const GalleryItem = ({image, onclickImage}) => {
     return (
         <li className='ImageGalleryItem'>
@@ -21,6 +23,16 @@ const Gallery = ({ images, onclickImage }) => {
         </div>
          
     )
+}
+
+GalleryItem.propTypes = {
+    image: PropTypes.object,
+    onclickImage: PropTypes.func,
+};
+
+Gallery.prototype = {
+    images: PropTypes.array,
+    onclickImage: PropTypes.func,
 }
 
 export default Gallery

@@ -4,11 +4,11 @@ import Gallery from "./ImageGallery";
 import Button from "./Button";
 import Modal from "./Modal";
 import Loader from "./Loader";
+import Notification from "./Notification";
 import search from './services/api'
+
 let page = 1
 const perPage = 12
-
-const Notification = ({message}) => <p className="notification">{message}</p>
 
 class App extends Component {
   state = {
@@ -102,8 +102,10 @@ class App extends Component {
       
   }
 
-  onclickmodal = () => {
-    this.setState({ishide: 'ishide'})
+  onclickmodal = (e) => {
+    if (e.currentTarget === e.target) {
+      this.setState({ishide: 'ishide'})
+    }
   }
 
   onclickImage = (image) => {
@@ -117,14 +119,14 @@ class App extends Component {
     const { images, button, message, image, ishide, visible } = this.state
     
     return (
-      <>
-        <Modal image={image} ishide={ishide} onclickmodal={this.onclickmodal}/> 
+      <div className='App'>
         <Searchbar onSubmit={this.onSubmit} onChange={this.onChange}/>
         <Notification message={message}/>
         <Gallery images={images} onclickImage={this.onclickImage}/>
         <Loader visible={visible}/>
-        {button && <Button onclick={this.buttonHandler} />}   
-      </>
+        {button && <Button onclick={this.buttonHandler} />}
+        <Modal image={image} ishide={ishide} onclickmodal={this.onclickmodal}/>  
+      </div>
     );
   } 
 };
