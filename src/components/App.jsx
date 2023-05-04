@@ -30,7 +30,7 @@ class App extends Component {
     try {
       search(this.state.keyword, page)
       .then(response => {
-        console.log(response.totalHits)
+        //console.log(response.totalHits)
         if (response.hits.length === 0) {
           this.setState({ message: 'No results found' })
           this.setState({button: false})
@@ -102,10 +102,8 @@ class App extends Component {
       
   }
 
-  documentclick = () => {
-      document.addEventListener('click', (event) => {
-        console.log('okk')
-    }  )
+  onclickmodal = () => {
+    this.setState({ishide: 'ishide'})
   }
 
   onclickImage = (image) => {
@@ -120,12 +118,12 @@ class App extends Component {
     
     return (
       <>
-        <Modal image={image} ishide={ishide}/> 
+        <Modal image={image} ishide={ishide} onclickmodal={this.onclickmodal}/> 
         <Searchbar onSubmit={this.onSubmit} onChange={this.onChange}/>
         <Notification message={message}/>
         <Gallery images={images} onclickImage={this.onclickImage}/>
         <Loader visible={visible}/>
-        {button && <Button onclick={this.buttonHandler} />}      
+        {button && <Button onclick={this.buttonHandler} />}   
       </>
     );
   } 

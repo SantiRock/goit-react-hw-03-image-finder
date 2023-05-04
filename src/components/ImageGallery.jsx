@@ -13,9 +13,13 @@ const GalleryItem = ({image, onclickImage}) => {
 
 const Gallery = ({ images, onclickImage }) => {
     return (
-        <ul className="ImageGallery">
-            {images.map(image => <GalleryItem key={image.id} image={image}  onclickImage={() => onclickImage({image})}/>)}
-        </ul>    
+        <div className="container">
+            <ul className="ImageGallery">
+                {images.map(image => <GalleryItem key={image.id} image={image} 
+                onclickImage={() => onclickImage({image})}/>)}
+            </ul>   
+        </div>
+         
     )
 }
 

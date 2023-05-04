@@ -3,11 +3,12 @@ import React, { Component } from "react";
 class Modal extends Component {
 static defaultProps = {
     image: null,
-    ishide: ''
+    ishide: '',
+    onclickmodal: null
 }
 
 render() {
-    const {image, ishide} = this.props
+    const {image, ishide, onclickmodal} = this.props
 
     if (image === null) {
         return 
@@ -15,7 +16,7 @@ render() {
         //console.log(image.image.likes)
 
         return (            
-            <div className={`Overlay ${ishide}`}>
+            <div className={`Overlay ${ishide}`} onClick={onclickmodal}>
                 <div className='Modal'>
                     <img src={image.image.largeImageURL} alt={image.image.tags}/>
                 </div>
