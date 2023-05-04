@@ -24,9 +24,9 @@ class App extends Component {
   onSubmit = evt => {
     evt.preventDefault()
     page = 1;
+    this.setState({visible: true})
     this.setState({images: []})
     this.setState({button: false})
-    this.setState({visible: true})
     try {
       search(this.state.keyword, page)
       .then(response => {
@@ -60,15 +60,19 @@ class App extends Component {
   }
 
   handleScroll() {
-    window.scrollBy({
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    });
+   /* window.scrollBy({
       top: window.innerHeight,
       left: 0,
       behavior: 'smooth'
-    });
+    });*/
   }
 
-  buttonHandler = evt => {
-    evt.preventDefault()
+ 
+  buttonHandler = () => {
     page += 1
     this.setState({visible: true})    
     try {
@@ -90,8 +94,8 @@ class App extends Component {
       this.setState({visible: false})
     } finally {
       setTimeout(this.handleScroll, 1000)
-    }
   }
+}
 
   escape = () => {
     document.addEventListener('keydown', event => {
